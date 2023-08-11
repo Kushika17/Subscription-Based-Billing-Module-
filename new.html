@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .selected-row {
+            background-color: blue;
+            color: white;
+        }
+        .price.hidden {
+            display: none;
+        }
+    </style>
+    <title>Available Plans</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Available Plans</h2>
+        <table class="plans">
+            <tr>
+                <th>Plan Name</th>
+                <th>Price</th>
+                <th>Video Quality</th>
+                <th>Resolution</th>
+                <th>Devices</th>
+                <th>Number of Screens</th>
+                <th>Select</th>
+            </tr>
+            <tr data-plan="Basic">
+                <td>Basic</td>
+                <td>
+                    <span class="price monthly-price">100 INR</span>
+                    <span class="price yearly-price hidden">1000 INR</span>
+                </td>
+                <td>Good</td>
+                <td>480p</td>
+                <td>Phone</td>
+                <td>1</td>
+                <td><button onclick="selectPlan('Basic', this)">Select</button></td>
+            </tr>
+            <tr data-plan="Standard">
+                <td>Standard</td>
+                <td>
+                    <span class="price monthly-price">200 INR</span>
+                    <span class="price yearly-price hidden">2000 INR</span>
+                </td>
+                <td>Good</td>
+                <td>720p</td>
+                <td>Phone+Tablet</td>
+                <td>3</td>
+                <td><button onclick="selectPlan('Standard', this)">Select</button></td>
+            </tr>
+            <tr data-plan="Premium">
+                <td>Premium</td>
+                <td>
+                    <span class="price monthly-price">500 INR</span>
+                    <span class="price yearly-price hidden">5000 INR</span>
+                </td>
+                <td>Better</td>
+                <td>1080p</td>
+                <td>Phone+Tablet+Computer</td>
+                <td>5</td>
+                <td><button onclick="selectPlan('Premium', this)">Select</button></td>
+            </tr>
+            <tr data-plan="Regular">
+                <td>Regular</td>
+                <td>
+                    <span class="price monthly-price">700 INR</span>
+                    <span class="price yearly-price hidden">7000 INR</span>
+                </td>
+                <td>Best</td>
+                <td>4K+HDR</td>
+                <td>Phone+Tablet+TV</td>
+                <td>10</td>
+                <td><button onclick="selectPlan('Regular', this)">Select</button></td>
+            </tr>
+            
+            <tr data-plan="Custom">
+                <td>Custom</td>
+                <td>
+                    <span class="price monthly-price">300 INR</span>
+                    <span class="price yearly-price hidden">3000 INR</span>
+                </td>
+                <td>Good</td>
+                <td>720p</td>
+                <td>Phone+Tablet</td>
+                <td>3</td>
+                <td><button onclick="selectPlan('Custom', this)">Select</button></td>
+            </tr>
+            
+        </table>
+        <div class="toggle-buttons">
+            <button onclick="togglePrices('monthly')">Show Monthly Prices</button>
+            <button onclick="togglePrices('yearly')">Show Yearly Prices</button>
+        </div>
+        <button id="nextButton" style="display: none;" onclick="navigateToCard()">Next</button>
+    </div>
+
+    <script>
+        let selectedPlan = '';
+        let pricesDisplayed = 'monthly';
+
+        function selectPlan(planName, buttonElement) {
+            if (selectedPlan) {
+                let prevSelectedRow = document.querySelector(`tr[data-plan="${selectedPlan}"]`);
+                prevSelectedRow.classList.remove('selected-row');
+            }
+
+            selectedPlan = planName;
+            document.getElementById('nextButton').style.display = 'block';
+
+            let selectedRow = buttonElement.closest('tr');
+            selectedRow.classList.add('selected-row');
+        }
+
+        function togglePriceVisibility(row) {
+            let monthlyPrice = row.querySelector('.monthly-price');
+            let yearlyPrice = row.querySelector('.yearly-price');
+
+            if (pricesDisplayed === 'monthly') {
+                monthlyPrice.classList.remove('hidden');
+                yearlyPrice.classList.add('hidden');
+            } else {
+                monthlyPrice.classList.add('hidden');
+                yearlyPrice.classList.remove('hidden');
+            }
+        }
+
+        function togglePrices(option) {
+            pricesDisplayed = option;
+            let priceSpans = document.querySelectorAll('.price');
+
+            priceSpans.forEach(span => {
+                if (pricesDisplayed === 'monthly') {
+                    if (span.classList.contains('monthly-price')) {
+                        span.classList.remove('hidden');
+                    } else {
+                        span.classList.add('hidden');
+                    }
+                } else if (pricesDisplayed === 'yearly') {
+                    if (span.classList.contains('yearly-price')) {
+                        span.classList.remove('hidden');
+                    } else {
+                        span.classList.add('hidden');
+                    }
+                }
+            });
+        }
+
+        function navigateToCard() {
+            if (selectedPlan) {
+                window.location.href = `card.html?plan=${selectedPlan}`;
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+

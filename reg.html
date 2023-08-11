@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Registration</title>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>Create Account</h2>
+            <form id="registrationForm">
+                <div class="input-group">
+                    <label for="regUsername">Name:</label>
+                    <input type="text" id="regUsername" class="input-field" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="regEmail">Email:</label>
+                    <input type="email" id="regEmail" class="input-field" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="regPassword">Password:</label>
+                    <input type="password" id="regPassword" class="input-field" required>
+                </div>
+                
+                <div class="remember-me">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Remember Me</label>
+                </div>
+                
+                <button type="button" class="button" onclick="register()">Submit</button>
+            </form>
+            <p class="alternate-action">Already have an account? <a href="login.html">Log In</a></p>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
